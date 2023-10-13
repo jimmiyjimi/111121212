@@ -50,3 +50,5 @@ class UserPasswordChangeForm(PasswordChangeForm):
     new_password2 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
         'class': 'form-control'
     }), label="Confirm New Password")
+
+

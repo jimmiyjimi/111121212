@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback</title>
+    <style>
+        body {
+            font-family: Georgia, serif; /* Classic font */
+            background-image: url("https://www.cccollision.net/wp-content/uploads/2020/03/3-Things-to-Know-About-Collision-Repair-for-Classic-Cars.jpg"); /* Dark brown color base */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rosybrown; /* Dark pink background */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #fff; /* White text color */
+            font-size: 32px; /* Larger font size */
+            margin-bottom: 20px;
+            font-family: Roboto Slab, sans-serif;
+        }
+
+        p {
+            color: #666;
+        }
+
+        .feedback-card {
+            margin: 20px 0;
+            border: 1px solid #423f3f; /* Dark brown border */
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #f8e6e6; /* Light brown card background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: Roboto Slab, sans-serif;
+        }
+
+        .feedback-photo {
+            max-width: 100px; /* Adjust the photo size as needed */
+            border-radius: 50%;
+            margin: 10px auto;
+        }
+
+        .feedback-rating {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Feedback</h1>
+        <div class="feedback-card">
+            <img class="feedback-photo" src="user1.jpg" alt="User 1">
+            <p>User 1's feedback:</p>
+            <p class="feedback-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>Great service! I'm very satisfied with the quality and speed of delivery.</p>
+        </div>
+        <div class="feedback-card">
+            <img class="feedback-photo" src="user2.jpg" alt="User 2">
+            <p>User 2's feedback:</p>
+            <p class="feedback-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>Excellent experience. The product exceeded my expectations.</p>
+        </div>
+        <div class="feedback-card">
+            <img class="feedback-photo" src="user3.jpg" alt="User 3">
+            <p>User 3's feedback:</p>
+            <p class="feedback-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>Outstanding customer service. I highly recommend this company.</p>
+        </div>
+    </div>
+</body>
+</html>
