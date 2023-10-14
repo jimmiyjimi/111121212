@@ -145,24 +145,24 @@
           <div class="col-md-4 position-relative">
             <div class="p-3 text-center">
               <h1 class="text-gradient text-primary"><span id="state1" countTo="70">0</span>+</h1>
-              <h5 class="mt-3">Upgradasdadklsjaadhskhadshdashsdahls</h5>
-              <p class="text-sm font-weight-normal">Transformed Websites: Elevate Your Online Presence with Our Upgrades.</p>
+              <h5 class="mt-3">Dreams completed</h5>
+              <p class="text-sm font-weight-normal">Classic car's the dream of everybody</p>
             </div>
             <hr class="vertical dark">
           </div>
           <div class="col-md-4 position-relative">
             <div class="p-3 text-center">
               <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">0</span>+</h1>
-              <h5 class="mt-3">Successful SEM Customers</h5>
-              <p class="text-sm font-weight-normal">Join Our Roster of Successful SEM Customers and Boost Your Business.</p>
+              <h5 class="mt-3">Cars in inventory</h5>
+              <p class="text-sm font-weight-normal"></p>
             </div>
             <hr class="vertical dark">
           </div>
           <div class="col-md-4">
             <div class="p-3 text-center">
               <h1 class="text-gradient text-primary" id="state3" countTo="4">0</h1>
-              <h5 class="mt-3">Ready made SMM Pages</h5>
-              <p class="text-sm font-weight-normal">Instantly Elevate Your Social Media with Ready-Made SMM Pages.</p>
+              <h5 class="mt-3">Contact us</h5>
+              <p class="text-sm font-weight-normal">Agents are ready to receive your call and provide information</p>
             </div>
           </div>
         </div>
@@ -233,16 +233,74 @@
    <div class="row mb-4">
     <div class="col-md-3">
         <h4>Sort By:</h4>
-        <select id="sorting-options" class="form-select">
+        <select id="sorting-options" class="form-select" style="padding-left: 10px">
             <option value="price-asc">Price (Low to High)</option>
             <option value="price-desc">Price (High to Low)</option>
             <option value="year-asc">Year (Old to New)</option>
             <option value="year-desc">Year (New to Old)</option>
         </select>
     </div>
+   <style>
+    .car-container {
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(0);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sortingOptions = document.getElementById("sorting-options");
+        const carList = document.getElementById("car-list");
+
+        sortingOptions.addEventListener("change", function() {
+            const selectedOption = sortingOptions.value;
+            const carContainers = document.querySelectorAll(".car-container");
+            const carArray = Array.from(carContainers);
+
+            if (selectedOption === "price-asc") {
+                carArray.sort((a, b) => {
+                    const priceA = parseInt(a.dataset.price);
+                    const priceB = parseInt(b.dataset.price);
+                    return priceA - priceB;
+                });
+            } else if (selectedOption === "price-desc") {
+                carArray.sort((a, b) => {
+                    const priceA = parseInt(a.dataset.price);
+                    const priceB = parseInt(b.dataset.price);
+                    return priceB - priceA;
+                });
+            } else if (selectedOption === "year-asc") {
+                carArray.sort((a, b) => {
+                    const yearA = parseInt(a.dataset.year);
+                    const yearB = parseInt(b.dataset.year);
+                    return yearA - yearB;
+                });
+            } else if (selectedOption === "year-desc") {
+                carArray.sort((a, b) => {
+                    const yearA = parseInt(a.dataset.year);
+                    const yearB = parseInt(b.dataset.year);
+                    return yearB - yearA;
+                });
+            }
+
+            // Clear the current car list
+            carList.innerHTML = '';
+
+            // Slide in the sorted car containers
+            carArray.forEach((container, index) => {
+                container.style.transform = `translateX(${index * 25}%)`;
+                carList.appendChild(container);
+                // Trigger reflow for the transition to work
+                container.getBoundingClientRect();
+                container.style.transform = 'translateX(0)';
+            });
+        });
+    });
+</script>
+
    <div class="col-md-3">
     <h4>Filter By Brand:</h4>
-    <select id="brand-filter" class="form-select" onchange="filterCars()">
+    <select id="brand-filter" class="form-select" onchange="filterCars()" style="padding-left: 10px">
         <option value="all">All Brands</option>
         {% for brand in brands %}
             <option value="{{ brand }}">{{ brand }}</option>
@@ -255,9 +313,9 @@
 
 
     <!-- Car Listings -->
-      <div class="row" id="car-list">
+      <div class="row" id="car-list" style="padding-left: 20px">
     {% for car in car_list %}
-    <div class="col-md-3 col-sm-4 car-container" data-brand="{{ car.brand }}">
+    <div class="col-md-3 col-sm-4 car-container" data-brand="{{ car.brand }}" data-year="{{ car.year }}" data-price="car.price">
         <div class="card card1">
             <div class="image-container">
                 <a href="{% url 'car_details' car.id %}">
@@ -303,15 +361,7 @@
         }
 
         // Hide brand names that have no visible cars
-        var brandOptions = document.getElementById("brand-filter").options;
-        for (var j = 1; j < brandOptions.length; j++) {
-            var brandName = brandOptions[j].value;
-            if (uniqueBrands.indexOf(brandName) === -1) {
-                brandOptions[j].style.display = "none";
-            } else {
-                brandOptions[j].style.display = "block";
-            }
-        }
+
     }
 </script>
 
@@ -348,8 +398,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (visibleItems < cars.length) {
             showMoreButton.textContent = "Show More";
+            showMoreButton.style.display = "block"; // Ensure the button is visible
         } else {
-            showMoreButton.textContent = "Show Less";
+            showMoreButton.style.display = "none"; // Hide the button if not enough cars to show
         }
     }
 
@@ -383,8 +434,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Send selected sorting option and brand filter to the Django view using AJAX
         filterAndSortCars();
     });
-
-
 });
 </script>
 
@@ -399,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="row text-center my-sm-5 mt-5">
         <div class="col-lg-6 mx-auto">
 
-          <h2 class="">Customer Experiences: On the Road to Satisfaction</h2>
+          <h2 class="">Quality Assurance: On the road to Satisfaction</h2>
         </div>
       </div>
     </div>
@@ -611,6 +660,8 @@ document.addEventListener("DOMContentLoaded", function () {
           <h1 class="text-white">Chips Classic Cars</h1>
           <p class="lead text-white opacity-8">Phone number: +1 (415) 907-6004</p>
              <p class="lead text-white opacity-8">Address: 743 NORTH KETSER AVE, 6510053 </p>
+            <p class="lead text-white opacity-8">E-mail: 743 NORTH KETSER AVE, 6510053 </p>
+
 
         </div>
       </div>
@@ -660,7 +711,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
               </div>
             </div>
-            <p class="mt-4">"This is an excellent product, the documentation is excellent and helped me get things done more efficiently."</p>
+            <p class="mt-4">"Vintage car heaven! This dealership boasts an exquisite collection, knowledgeable staff, and an immersive atmosphere that takes you on a nostalgic ride through automotive history."</p>
             <div class="rating mt-3">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -683,7 +734,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
               </div>
             </div>
-            <p class="mt-4 text-white">"I found solution to all my design needs from Creative Tim. I use them as a freelancer in my hobby projects for fun! And its really affordable, very humble guys !!!"</p>
+            <p class="mt-4 text-white">"Exceptional classic car dealership! A captivating journey through automotive history with a diverse collection, passionate staff, and an authentic atmosphere. A must-visit for vintage car enthusiasts."</p>
             <div class="rating mt-3">
               <i class="fas fa-star text-white"></i>
               <i class="fas fa-star text-white"></i>
@@ -706,7 +757,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
               </div>
             </div>
-            <p class="mt-4">"Great product. Helped me cut the time to set up a site. I used the components within instead of starting from scratch. I highly recommend for developers who want to spend more time on the backend!."</p>
+            <p class="mt-4">"A classic car aficionado's dream! This dealership is a time capsule of automotive excellence, featuring a stunning range of vintage gems and a staff truly passionate about these treasures."</p>
             <div class="rating mt-3">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
