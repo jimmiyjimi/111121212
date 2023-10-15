@@ -4,57 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Feedback</title>
+    <!-- Add these lines to your <head> section -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" href="https://chipsclassiccars.com/wp-content/uploads/2023/09/Chips-Logo-1.png">
+
     <style>
         body {
-            font-family: Georgia, serif; /* Classic font */
-            background-image: url("https://www.cccollision.net/wp-content/uploads/2020/03/3-Things-to-Know-About-Collision-Repair-for-Classic-Cars.jpg"); /* Dark brown color base */
+            font-family: 'Arial', sans-serif; /* Modern font */
+            background-image: url("https://www.cccollision.net/wp-content/uploads/2020/03/3-Things-to-Know-About-Collision-Repair-for-Classic-Cars.jpg");
+            background-size: cover; /* Full background coverage */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            height: 100vh;
         }
 
         .container {
-            background-color: rosybrown; /* Dark pink background */
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 600px;
-        }
+    background-color: #fff; /* White background */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px;
+    opacity: 0.95;
+}
+
 
         h1 {
-            color: #fff; /* White text color */
-            font-size: 32px; /* Larger font size */
+            color: #D81B60; /* Highlight color */
+            font-size: 36px; /* Larger font size */
+            font-family: 'Montserrat', sans-serif; /* Modern font */
             margin-bottom: 20px;
-            font-family: Roboto Slab, sans-serif;
         }
 
         p {
-            color: #666;
+            color: #333;
         }
 
         .feedback-card {
             margin: 20px 0;
-            border: 1px solid #423f3f; /* Dark brown border */
+            border: 2px solid #D81B60; /* Highlight border */
             border-radius: 10px;
-            padding: 15px;
-            background-color: #f8e6e6; /* Light brown card background */
+            padding: 20px;
+            background-color: #fff; /* White background */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            font-family: Roboto Slab, sans-serif;
+            font-family: 'Montserrat', sans-serif; /* Modern font */
         }
 
         .feedback-photo {
-            max-width: 100px; /* Adjust the photo size as needed */
-            border-radius: 50%;
+            max-width: 300px;
+            border-radius: 10%;
             margin: 10px auto;
         }
 
         .feedback-rating {
             font-size: 24px;
+            color: #D81B60; /* Highlight color */
+        }
+
+        .custom-btn {
+            color: #fff; /* White text color */
+            background-color: #D81B60; /* Highlight color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .custom-btn:hover {
+            background-color: #fff;
+            color: #D81B60;
+            border-color: #D81B60;
+        }
+        .container{
+            margin-top: 600px;
+        }
+        @media (max-width: 768px) {
+            .container{
+                margin-top: 1500px;
+            }
         }
     </style>
 </head>
@@ -62,23 +98,103 @@
     <div class="container">
         <h1>Customer Feedback</h1>
         <div class="feedback-card">
-            <img class="feedback-photo" src="user1.jpg" alt="User 1">
-            <p>User 1's feedback:</p>
+            <img class="feedback-photo" src="https://pastandpresentmotorcars.com/website/dealer/shipping2/1" alt="User 1">
+            <p>James Smith's feedback:</p>
             <p class="feedback-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
             <p>Great service! I'm very satisfied with the quality and speed of delivery.</p>
         </div>
         <div class="feedback-card">
-            <img class="feedback-photo" src="user2.jpg" alt="User 2">
-            <p>User 2's feedback:</p>
+            <img class="feedback-photo" src="https://pastandpresentmotorcars.com/website/dealer/shipping2/2" alt="User 2">
+            <p>John Johnson's feedback:</p>
             <p class="feedback-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
             <p>Excellent experience. The product exceeded my expectations.</p>
         </div>
         <div class="feedback-card">
-            <img class="feedback-photo" src="user3.jpg" alt="User 3">
-            <p>User 3's feedback:</p>
+            <img class="feedback-photo" src="https://pastandpresentmotorcars.com/website/dealer/shipping3/1" alt="User 3">
+            <p>Charles Clark's feedback:</p>
             <p class="feedback-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
             <p>Outstanding customer service. I highly recommend this company.</p>
         </div>
+        <div class="feedback-card">
+    <h2>Leave a Feedback</h2>
+    <form class="p-3" id="feedback-form" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <select class="form-control" id="rating" name="rating" required>
+                <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
+                <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
+                <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
+                <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="feedback">Your Feedback</label>
+            <textarea class="form-control" id="feedback" name="feedback" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Upload an Image</label>
+            <input type="file" class="form-control-file" id="image" name="image">
+        </div>
+        <button type="button" class="btn btn-primary btn-lg mx-auto d-block custom-btn" id="submit-btn">Submit</button>
+    </form>
+</div>
+        <style>
+        /* Add this CSS for the dialog box */
+        .dialog-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            font-size: 30px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .dialog-box.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Other existing styles in your CSS */
+    </style>
+        <div class="dialog-box" id="dialog-box" style="font-size: 30px">
+        Your review will appear on the website, as soon as possible
+    </div>
+ <script>
+        // JavaScript to handle the dialog box
+        document.getElementById("submit-btn").addEventListener("click", function() {
+            var name = document.getElementById("name").value;
+            var rating = document.getElementById("rating").value;
+            var feedback = document.getElementById("feedback").value;
+
+            if (name && rating && feedback) {
+                // All fields are filled
+                var dialogBox = document.getElementById("dialog-box");
+                dialogBox.classList.add("visible");
+                document.getElementById("feedback-form").reset();
+
+                // Automatically hide the dialog after a delay (e.g., 3 seconds)
+                setTimeout(function() {
+                    dialogBox.classList.remove("visible");
+                    location.reload();
+                }, 2000);
+            } else {
+                // Not all fields are filled
+            }
+        });
+    </script>
+
     </div>
 </body>
 </html>
