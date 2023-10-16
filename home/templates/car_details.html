@@ -59,26 +59,27 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="card-title text-center mt-5">{{ car.brand }} {{ car.model }}</h2>
-        <div class="card">
-            <img src="{{ car.main_photo.url }}" class="card-img-top img-fluid" alt="Car Image">
-            <div class="card-body">
-                <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-                <p class="card-text">Price: ${{ car.price }}</p>
-                <p class="card-text">Year: {{ car.year }}</p>
-                <p class="card-text">{{ car.short_info }}</p>
-            </div>
+   <div class="container">
+    <h2 class="card-title text-center mt-5">{{ car.brand }} {{ car.model }}</h2>
+    <div class="card">
+        <img src="{{ car.main_photo.url }}" class="card-img-top img-fluid" alt="Car Image">
+        <div class="card-body">
+            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+            <p class="card-text">Price: ${{ car.price }}</p>
+            <p class="card-text">Year: {{ car.year }}</p>
+            <textarea class="card-text" style="height: 850px; width: 600px; overflow-y: auto;resize: none;border: none; overflow: hidden ;background-color: transparent; font-family: 'Arial'; line-height: 40px" readonly>{{ car.short_info }}</textarea>
         </div>
     </div>
+</div>
+
     <div class="container contact-us">
         <h3 class="contact-heading">Contact Us</h3>
         <p class="contact-text">
             If you have any questions about this classic car or would like to inquire about purchasing it, feel free to contact us. We're here to help!
            <p> Phone number: +1 (415) 907-6004
 
-            <p>Address: 743 NORTH KETSER AVE, 6510053
-        <p>E-mail: Chipsclassics
+            <p>Address: 743 NORTH KEYSER AVE, 6510053
+        <p>E-mail: sales@chipsclassicscars.com
         </p>
     </div>
 

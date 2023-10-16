@@ -48,7 +48,7 @@
       </li>
       <li>
           <a href="/home/templates/feedback.html">
-        <h1 class="custom-h1-style" data-link="link3">Feedback</h1>
+        <h1 class="custom-h1-style" data-link="link3">Shipping</h1>
           </a>
       </li>
       <!-- Additional items -->
@@ -230,9 +230,9 @@
     <h2 class="text-center mt-5">Car Marketplace</h2>
 
     <!-- Sorting Options (To be implemented with JavaScript) -->
-   <div class="row mb-4">
+   <div class="row mb-4"  style="padding-left: 22%">
     <div class="col-md-3">
-        <h4>Sort By:</h4>
+        <h4 style="font-size: 25px">Sort By:</h4>
         <select id="sorting-options" class="form-select" style="padding-left: 10px">
             <option value="price-asc">Price (Low to High)</option>
             <option value="price-desc">Price (High to Low)</option>
@@ -299,7 +299,7 @@
 </script>
 
    <div class="col-md-3">
-    <h4>Filter By Brand:</h4>
+    <h4 style="font-size: 25px">Filter By Brand:</h4>
     <select id="brand-filter" class="form-select" onchange="filterCars()" style="padding-left: 10px">
         <option value="all">All Brands</option>
         {% for brand in brands %}
@@ -307,7 +307,18 @@
         {% endfor %}
     </select>
 </div>
+ <div class="col-md-3" >
+    <h4 style="font-size: 25px">Filter By Bodystyles:</h4>
+    <select id="type-filter" class="form-select" onchange="filterCarsbytype()" style="padding-left: 10px">
+        <option value="all">All Bodystyles</option>
+        {% for type in types %}
+            <option value="{{ type }}">{{ type }}</option>
+        {% endfor %}
+    </select>
 </div>
+
+   </div>
+
 
 </div>
 
@@ -338,30 +349,38 @@
 </div>
 
 <script>
-    function filterCars() {
-        var selectedBrand = document.getElementById("brand-filter").value;
+    function filterCarsByType() {
+        var selectedType = document.getElementById("type-filter").value;
         var carContainers = document.getElementsByClassName("car-container");
-        var uniqueBrands = [];
+        var uniqueTypes = [];
 
         for (var i = 0; i < carContainers.length; i++) {
-            var carBrand = carContainers[i].getAttribute("data-brand");
+            var carType = carContainers[i].getAttribute("data-type");
 
             // Initially show all cars
             carContainers[i].style.display = "block";
 
-            // Hide cars that don't match the selected brand
-            if (selectedBrand !== "all" && carBrand !== selectedBrand) {
+            // Hide cars that don't match the selected type
+            if (selectedType !== "all" && carType !== selectedType) {
                 carContainers[i].style.display = "none";
             }
 
-            // Keep track of unique brands with visible cars
-            if (carContainers[i].style.display === "block" && uniqueBrands.indexOf(carBrand) === -1) {
-                uniqueBrands.push(carBrand);
+            // Keep track of unique types with visible cars
+            if (carContainers[i].style.display === "block" && uniqueTypes.indexOf(carType) === -1) {
+                uniqueTypes.push(carType);
             }
         }
 
-        // Hide brand names that have no visible cars
-
+        // Hide type names that have no visible cars
+        var typeOptions = document.getElementById("type-filter").getElementsByTagName("option");
+        for (var i = 0; i < typeOptions.length; i++) {
+            var typeValue = typeOptions[i].value;
+            if (typeValue !== "all" && uniqueTypes.indexOf(typeValue) === -1) {
+                typeOptions[i].style.display = "none";
+            } else {
+                typeOptions[i].style.display = "block";
+            }
+        }
     }
 </script>
 
@@ -662,7 +681,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="lead text-white opacity-8">Phone number: +1 (415) 907-6004 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16" style="">
   <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
 </svg></p>
-             <p class="lead text-white opacity-8">Address: 743 NORTH KETSER AVE, 6510053 </p>
+             <p class="lead text-white opacity-8">Address: 743 NORTH KEYSER AVE, 6510053 </p>
             <p class="lead text-white opacity-8">E-mail: sales@chipsclassicscars.com <i class="bi bi-telephone"></i></p>
 
 
@@ -782,7 +801,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <p>©2023 Chips Classic Llc</p>
       </div>
       <div class="col-lg-2 col-md-4 col-6">
-        <p>743 NORTH KETSER AVE</p>
+        <p>743 NORTH KEYSER AVE</p>
       </div>
       <div class="col-lg-2 col-md-4 col-6">
         <p>+1 (415) 907-6004</p>

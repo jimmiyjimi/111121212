@@ -3,8 +3,8 @@ from .models import Car, CarPhoto
 
 
 class CarAdmin(admin.ModelAdmin):
-    list_display = ('brand', 'model', 'price', 'year', 'main_photo', 'short_info')
-    list_filter = ('brand', 'model', 'year')
+    list_display = ('brand', 'model', 'price', 'year', 'type', 'main_photo', 'short_info')
+    list_filter = ('brand', 'model', 'year', 'type')
     search_fields = ('brand', 'model')
 
     actions = ['delete_selected_cars']
