@@ -297,6 +297,89 @@
         });
     });
 </script>
+   <script>
+  function filterCars() {
+    // Get selected brand
+    var selectedBrand = document.getElementById("brand-filter").value;
+    var carContainers = document.getElementsByClassName("car-container");
+
+    for (var i = 0; i < carContainers.length; i++) {
+      var carBrand = carContainers[i].getAttribute("data-brand");
+
+      // Initially show all cars
+      carContainers[i].style.display = "block";
+
+      // Hide cars that don't match the selected brand
+      if (selectedBrand !== "all" && carBrand !== selectedBrand) {
+        carContainers[i].style.display = "none";
+      }
+    }
+  }
+
+  function filterCarsByType() {
+    // Get selected bodystyle
+    var selectedType = document.getElementById("type-filter").value;
+    var carContainers = document.getElementsByClassName("car-container");
+
+    for (var i = 0; i < carContainers.length; i++) {
+      var carType = carContainers[i].getAttribute("data-type");
+
+      // Initially show all cars
+      carContainers[i].style.display = "block";
+
+      // Hide cars that don't match the selected bodystyle
+      if (selectedType !== "all" && carType !== selectedType) {
+        carContainers[i].style.display = "none";
+      }
+    }
+  }
+
+  // Add a JavaScript function to show/hide car listings
+  document.addEventListener("DOMContentLoaded", function () {
+    const carList = document.getElementById("car-list");
+    const showMoreButton = document.getElementById("show-more");
+    const cars = carList.querySelectorAll(".car1");
+    const itemsToShow = 9; // Number of items to show initially
+    let visibleItems = itemsToShow;
+
+    // Function to show or hide car listings with animation
+    function toggleCarList() {
+      cars.forEach((car, index) => {
+        if (index < visibleItems) {
+          car.style.display = "block";
+          setTimeout(() => {
+            car.style.opacity = 1;
+            car.style.transform = "translateX(0)";
+          }, 100 * index); // Delay the animation for each item
+        } else {
+          car.style.opacity = 0;
+          car.style.transform = "translateX(-20px)";
+          car.style.display = "none";
+        }
+      });
+
+      if (visibleItems < cars.length) {
+        showMoreButton.textContent = "Show More"; // Change the button text
+      } else {
+        showMoreButton.textContent = "Show Less"; // Change the button text
+      }
+    }
+
+    // Initial setup
+    toggleCarList();
+
+    // Event listener for "Show More/Show Less" button
+    showMoreButton.addEventListener("click", function () {
+      if (visibleItems === itemsToShow) {
+        visibleItems = cars.length; // Show all cars
+      } else {
+        visibleItems = itemsToShow; // Show initial number of cars
+      }
+      toggleCarList();
+    });
+  });
+</script>
+
 
    <div class="col-md-3">
     <h4 style="font-size: 25px">Filter By Brand:</h4>
@@ -309,7 +392,7 @@
 </div>
  <div class="col-md-3" >
     <h4 style="font-size: 25px">Filter By Bodystyles:</h4>
-    <select id="type-filter" class="form-select" onchange="filterCarsbytype()" style="padding-left: 10px">
+    <select id="type-filter" class="form-select" onchange="filterCarsByType()" style="padding-left: 10px">
         <option value="all">All Bodystyles</option>
         {% for type in types %}
             <option value="{{ type }}">{{ type }}</option>
@@ -326,7 +409,7 @@
     <!-- Car Listings -->
       <div class="row" id="car-list" style="padding-left: 20px">
     {% for car in car_list %}
-    <div class="col-md-3 col-sm-4 car-container" data-brand="{{ car.brand }}" data-year="{{ car.year }}" data-price="car.price">
+    <div class="col-md-3 col-sm-4 car-container" data-brand="{{ car.brand }}" data-year="{{ car.year }}" data-price="car.price" data-type="{{ car.type }}">
         <div class="card card1">
             <div class="image-container">
                 <a href="{% url 'car_details' car.id %}">
@@ -348,41 +431,6 @@
     {% endfor %}
 </div>
 
-<script>
-    function filterCarsByType() {
-        var selectedType = document.getElementById("type-filter").value;
-        var carContainers = document.getElementsByClassName("car-container");
-        var uniqueTypes = [];
-
-        for (var i = 0; i < carContainers.length; i++) {
-            var carType = carContainers[i].getAttribute("data-type");
-
-            // Initially show all cars
-            carContainers[i].style.display = "block";
-
-            // Hide cars that don't match the selected type
-            if (selectedType !== "all" && carType !== selectedType) {
-                carContainers[i].style.display = "none";
-            }
-
-            // Keep track of unique types with visible cars
-            if (carContainers[i].style.display === "block" && uniqueTypes.indexOf(carType) === -1) {
-                uniqueTypes.push(carType);
-            }
-        }
-
-        // Hide type names that have no visible cars
-        var typeOptions = document.getElementById("type-filter").getElementsByTagName("option");
-        for (var i = 0; i < typeOptions.length; i++) {
-            var typeValue = typeOptions[i].value;
-            if (typeValue !== "all" && uniqueTypes.indexOf(typeValue) === -1) {
-                typeOptions[i].style.display = "none";
-            } else {
-                typeOptions[i].style.display = "block";
-            }
-        }
-    }
-</script>
 
 
 
