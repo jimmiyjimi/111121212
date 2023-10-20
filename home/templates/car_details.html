@@ -69,7 +69,21 @@
         <div class="card-body">
             <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
             <p class="card-text">Price: ${{ car.price }}</p>
-            <textarea class="card-text" style="height: 850px; width: 600px; overflow-y: auto;resize: none;border: none; overflow: hidden ;background-color: transparent; font-family: 'Arial'; line-height: 40px" readonly>{{ car.short_info }}</textarea>
+            <textarea class="auto-resize-textarea" id="myTextarea" readonly>{{ car.short_info }}</textarea>
+
+<script>
+    // Get the textarea element
+    const textarea = document.getElementById('myTextarea');
+
+    // Add an event listener to the textarea for input changes
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto'; // Reset the height
+        this.style.height = (this.scrollHeight) + 'px'; // Set the height to fit the content
+    });
+
+    // Trigger the input event initially to set the initial height
+    textarea.dispatchEvent(new Event('input'));
+</script>
         </div>
     </div>
 </div>
@@ -95,6 +109,17 @@
             {% endfor %}
         </div>
     </div>
-
+ <style>
+        .auto-resize-textarea {
+            height: auto;
+            width: 600px;
+            overflow-y: hidden;
+            resize: none;
+            border: none;
+            background-color: transparent;
+            font-family: 'Arial';
+            line-height: 40px;
+        }
+    </style>
 </body>
 </html>
